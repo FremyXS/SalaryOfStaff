@@ -4,23 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExamProjectRemake
+namespace SalaryOfStaff
 {
-    public class Person
+    public class Worker
     {
         public string Name { get; }
         public string NameWorkShop { get; }
-        public int Salary { get; set; }
-        public bool Director { get; }
-
-        public Person(string[] info)
+        public int Salary { get; }
+        public bool Director { get; } = false;
+        public Worker(string[] info)
         {
             Name = info[0];
             NameWorkShop = info[1];
             Salary = int.Parse(info[2]);
-
-            if (info.Length == 4) Director = Convert.ToBoolean(info[3]);
-            else Director = false;
+            Director = info.Length == 4 ? Convert.ToBoolean(info[3]) : false;
         }
     }
 }

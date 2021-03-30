@@ -1,46 +1,22 @@
 ﻿using System;
-using System.IO;
-using System.Collections.Generic;
 
-namespace ExamProjectRemake
+namespace SalaryOfStaff
 {
     class Program
     {
-        public static string[] allStaffArray { get; } = File.ReadAllLines("FileWithStaff.txt");
-        public static List<Person> AllStaffList { get; set; } = new List<Person>();
         static void Main(string[] args)
-        {
-            GetStaff();
-            GetInfo();
+        {            
+            Counting.GetCounting();
+            WriteCounting();
         }
-        private static void GetStaff()
+        private static void WriteCounting()
         {
-            foreach (var indexOfEmployee in allStaffArray)
+            foreach(var i in Counting.AllWorkShops.Keys)
             {
-                var person = new Person(indexOfEmployee.Split(new char[] { ';' }));
-                AllStaffList.Add(person);
-            }
-        }
-        private static void GetInfo()
-        {
-            if (!Info.CheckManager())
-                throw new Exception("Error");
-            else
-            {
-                Info.GetAverageSalary();
-                InputInfo();
+                Console.WriteLine($"{i}: {Counting.GetAverageValue(i)}");
             }
 
-        }
-        private static void InputInfo()
-        {
-            foreach(var i in Info.AllWorkShops.Keys)
-            {
-                Console.WriteLine($"{i}: {Info.AllWorkShops[i].FullSalary}");
-            }
-
-            Console.WriteLine(Info.HighlyPaidSalaryPerson.Name + " " + Info.HighlyPaidSalaryPerson.Salary);
+            Console.WriteLine(Counting.NameOfDirector + ": " + Counting.SalaryOfDirector);
         }
     }
-    
 }
